@@ -225,3 +225,23 @@ Since you are migrating an existing project from v4, it's most likely **Level 3 
 - **Discord**: [Join the BMad Community](https://discord.gg/gk8jAdXWmj)
 - **Issues**: [GitHub Issue Tracker](https://github.com/bmad-code-org/BMAD-METHOD/issues)
 - **Docs**: Check `{bmad_folder}/docs/` in your installation for IDE-specific instructions
+
+## Spec Ledger in v6
+
+BMAD-METHOD v6 introduces the **Spec Ledger** as a new, central concept in the BMM module.
+
+In v4, requirements, data models, UI behaviour and API details were often scattered across multiple documents or implicit in PRD and architecture files. In v6, these details are captured in a unified Spec Ledger, with workbook-style sheets for:
+
+- Requirements, Workflows and State Models
+- Entities, Fields, Pages and Page Fields
+- Actions, Page–Actions–Roles and APIs
+- Events, Errors, Analytics KPIs and NFRs
+- User Stories, Traceability and Coverage
+
+New workflows such as `analyst-kickoff`, `brd-to-spec-ledger`, `generate-spec-ledger-doc`, and `sync-ledger-to-bmad-artifacts` work together to:
+
+- Parse BRDs into structured requirements and design data
+- Maintain end-to-end traceability from BRD to implementation
+- Generate PRD, architecture views and frontend specs as **views** of the Spec Ledger
+
+This significantly improves change impact analysis, auditability and the ability to handle large projects without running into model context limits.

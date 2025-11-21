@@ -69,6 +69,7 @@ graph TB
 | **research**           | Analyst       | No          | Multi-type research (market/technical/competitive/user/domain) | Research reports             |
 | **product-brief**      | Analyst       | Recommended | Define product vision and strategy (interactive)               | Product Brief document       |
 | **game-brief**         | Game Designer | Recommended | Capture game vision before GDD (interactive)                   | Game Brief document          |
+| **analyst-kickoff**    | Analyst       | No          | Guided intake to capture pain-points, actors, workflows, and seed Spec Ledger | Spec Ledger initialized |
 
 ---
 

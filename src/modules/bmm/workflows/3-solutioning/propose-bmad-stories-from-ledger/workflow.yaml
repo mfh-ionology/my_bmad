@@ -1,0 +1,39 @@
+# Propose BMad Stories From Ledger Workflow Configuration
+name: "propose-bmad-stories-from-ledger"
+description: "Use User_Stories entries to generate or update BMad story files with full traceability to requirements, entities, APIs, and ACs"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/propose-bmad-stories-from-ledger"
+instructions: "{installed_path}/instructions.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+
+# Story location (BMad convention)
+stories_folder: "{output_folder}/stories"
+
+# Output files
+default_output_file: "{output_folder}/stories-proposal-summary.md"
+
+standalone: true
+
+web_bundle:
+  name: "propose-bmad-stories-from-ledger"
+  description: "Use User_Stories entries to generate or update BMad story files with full traceability to requirements, entities, APIs, and ACs"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/3-solutioning/propose-bmad-stories-from-ledger/instructions.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/3-solutioning/propose-bmad-stories-from-ledger/instructions.md"
+

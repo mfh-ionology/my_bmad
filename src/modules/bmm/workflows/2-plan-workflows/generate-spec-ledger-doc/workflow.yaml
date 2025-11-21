@@ -1,0 +1,39 @@
+# Generate Spec Ledger Master Document Workflow Configuration
+name: "generate-spec-ledger-doc"
+description: "Generate the Spec Ledger master document from ledger sheets as the design source-of-truth"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/2-plan-workflows/generate-spec-ledger-doc"
+instructions: "{installed_path}/instructions.md"
+template: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-master-template.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+
+# Output files
+default_output_file: "{output_folder}/spec-ledger-master.md"
+
+standalone: true
+
+web_bundle:
+  name: "generate-spec-ledger-doc"
+  description: "Generate the Spec Ledger master document from ledger sheets as the design source-of-truth"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/2-plan-workflows/generate-spec-ledger-doc/instructions.md"
+  template: "{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-master-template.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/2-plan-workflows/generate-spec-ledger-doc/instructions.md"
+    - "{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-master-template.md"
+

@@ -97,6 +97,26 @@ Optional strategic planning document created in Phase 1 (Analysis) that captures
 
 Game development equivalent of PRD, created by Game Designer agent for game projects.
 
+### Spec Ledger
+
+**BMad Method/Enterprise tracks.** The single source of truth for requirements and design. A structured workbook-style representation (JSON) containing sheets for Requirements, Workflows, Entities, Fields, Pages, APIs, ACs, User Stories, Traceability, Coverage_Matrix, Uncovered_Aspects, External_Systems, Reference_Data, and Background_Jobs. Designed to solve context loss in large projects by maintaining structured data instead of giant text documents. PRD, architecture, and frontend specs reference ledger IDs and load only relevant slices.
+
+### BRD_Parse_Log
+
+Log of BRD parsing process (via brd-to-spec-ledger workflow), tracking confidence scores (high/medium/low) and ambiguities for each BRD segment mapped to Spec Ledger entries.
+
+### Traceability (Spec Ledger)
+
+Spec Ledger sheet that links requirements to implementations (entities, pages, APIs, ACs, user stories) using relation types: implements, depends_on, triggers, validates, uses, references.
+
+### Coverage_Matrix
+
+Spec Ledger sheet tracking which workflows have coverage for various aspects (requirements, entities, pages, APIs, ACs).
+
+### Uncovered_Aspects
+
+Spec Ledger sheet listing gaps in coverage with severity levels (critical, high, medium, low).
+
 ---
 
 ## Workflow and Phases

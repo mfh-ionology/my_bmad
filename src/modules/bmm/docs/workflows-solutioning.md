@@ -88,6 +88,8 @@ graph TB
 
 | Workflow                     | Agent       | Track                    | Purpose                                      |
 | ---------------------------- | ----------- | ------------------------ | -------------------------------------------- |
+| **sync-ledger-to-bmad-artifacts** | PM      | BMad Method, Enterprise  | Sync Spec Ledger into PRD/architecture (from Planning) |
+| **propose-stories-from-ledger** | PM        | BMad Method, Enterprise  | Generate story files from Spec Ledger (optional) |
 | **create-ux-design**         | UX Designer | BMad Method, Enterprise  | Optional UX design (after PRD, before arch)  |
 | **architecture**             | Architect   | BMad Method, Enterprise  | Technical architecture and design decisions  |
 | **create-epics-and-stories** | PM          | BMad Method, Enterprise  | Break FRs/NFRs into epics after architecture |
@@ -220,6 +222,42 @@ This is NOT a template filler. The architecture workflow:
 **Example:** E-commerce platform → Monolith + PostgreSQL + Redis + Next.js + GraphQL, with ADRs explaining each choice and FR/NFR-specific guidance.
 
 **Integration:** Feeds into create-epics-and-stories workflow. Architecture provides the technical context needed for breaking FRs/NFRs into implementable epics and stories. All dev agents reference architecture during Phase 4 implementation.
+
+---
+
+### sync-ledger-to-bmad-artifacts
+
+**Agent:** PM
+
+**Purpose:** Sync Spec Ledger content (from Planning phase) into PRD, architecture hints, frontend spec, and BMad story artifacts.
+
+**When to Use:** After Spec Ledger is populated (via brd-to-spec-ledger or analyst-kickoff), sync ledger content into existing artifacts.
+
+**Key Process:**
+- Updates/augments PRD sections with precise requirements (adds req_id references)
+- Suggests architecture hints (entities, state models, APIs, events, external systems)
+- Suggests/refines frontend spec (pages, page fields, actions, role mappings)
+- Ensures BMad Epics/Stories align with ledger Requirements & Workflows
+
+**Integration:** Runs after Planning phase Spec Ledger workflows, before or alongside architecture workflow.
+
+---
+
+### propose-stories-from-ledger
+
+**Agent:** PM
+
+**Purpose:** Use Spec Ledger User_Stories entries to generate or update BMad story files with full traceability.
+
+**When to Use:** Optional workflow to generate story files directly from Spec Ledger before or after create-epics-and-stories.
+
+**Key Process:**
+- Reads User_Stories sheet from Spec Ledger
+- Generates/updates story files (story-*.md) with full traceability
+- Links to requirement_ids_ref, api_ids_ref, entities_ref, ac_ids_ref
+- Groups stories into epics by workflow/module
+
+**Integration:** Can be used before or after create-epics-and-stories workflow.
 
 ---
 

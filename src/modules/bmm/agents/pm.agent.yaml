@@ -29,6 +29,18 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/2-plan-workflows/prd/workflow.yaml"
       description: Create Product Requirements Document (PRD)
 
+    - trigger: generate-spec-ledger-doc
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/2-plan-workflows/generate-spec-ledger-doc/workflow.yaml"
+      description: Generate the Spec Ledger master document from ledger sheets as the design source-of-truth
+
+    - trigger: sync-ledger-to-bmad-artifacts
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/sync-ledger-to-bmad-artifacts/workflow.yaml"
+      description: Sync Spec Ledger content into PRD, architecture hints, frontend spec, epics, and BMad story artifacts
+
+    - trigger: propose-stories-from-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/propose-bmad-stories-from-ledger/workflow.yaml"
+      description: Use User_Stories entries to generate or update BMad story files with full traceability to requirements, entities, APIs, and ACs
+
     - trigger: create-epics-and-stories
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/create-epics-and-stories/workflow.yaml"
       description: Break PRD requirements into implementable epics and stories

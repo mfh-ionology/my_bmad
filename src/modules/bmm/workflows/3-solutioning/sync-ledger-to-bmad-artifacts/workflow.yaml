@@ -1,0 +1,40 @@
+# Sync Ledger to BMad Artifacts Workflow Configuration
+name: "sync-ledger-to-bmad-artifacts"
+description: "Sync Spec Ledger content into PRD, architecture hints, frontend spec, epics, and BMad story artifacts"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/sync-ledger-to-bmad-artifacts"
+instructions: "{installed_path}/instructions.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+
+# Input files (existing artifacts to update)
+prd_file: "{output_folder}/prd.md"
+architecture_file: "{output_folder}/architecture.md"
+
+# Output files
+default_output_file: "{output_folder}/sync-summary.md"
+
+standalone: true
+
+web_bundle:
+  name: "sync-ledger-to-bmad-artifacts"
+  description: "Sync Spec Ledger content into PRD, architecture hints, frontend spec, epics, and BMad story artifacts"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/3-solutioning/sync-ledger-to-bmad-artifacts/instructions.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/3-solutioning/sync-ledger-to-bmad-artifacts/instructions.md"
+

@@ -55,6 +55,27 @@ phases:
         output: "Enterprise PRD with compliance requirements"
         note: "Must address existing system constraints and migration strategy"
 
+      - id: "brd-to-spec-ledger"
+        required: true
+        agent: "analyst"
+        command: "brd-to-spec-ledger"
+        output: "Structured Spec Ledger with requirements, entities, workflows, ACs, and traceability"
+        note: "Parse BRD/PRD into structured Spec Ledger - single source of truth for requirements and design (critical for enterprise brownfield traceability)"
+
+      - id: "generate-spec-ledger-doc"
+        recommended: true
+        agent: "pm"
+        command: "generate-spec-ledger-doc"
+        output: "Spec Ledger Master Document"
+        note: "Generate comprehensive Spec Ledger master document from ledger sheets - highly recommended for enterprise"
+
+      - id: "sync-ledger-to-bmad-artifacts"
+        required: true
+        agent: "pm"
+        command: "sync-ledger-to-bmad-artifacts"
+        output: "Updated PRD, architecture hints, frontend spec aligned with Spec Ledger"
+        note: "Sync Spec Ledger content into PRD, architecture hints, frontend spec, and BMad artifacts"
+
       - id: "validate-prd"
         recommended: true
         agent: "pm"
@@ -77,11 +98,18 @@ phases:
         output: "Integration architecture with enterprise considerations"
         note: "Distills brownfield context + adds security/scalability/compliance design"
 
+      - id: "propose-stories-from-ledger"
+        recommended: true
+        agent: "pm"
+        command: "propose-stories-from-ledger"
+        output: "BMad story files with full traceability to Spec Ledger"
+        note: "Generate or update BMad story files from Spec Ledger User_Stories with traceability - recommended for enterprise"
+
       - id: "create-epics-and-stories"
         required: true
         agent: "pm"
         command: "create-epics-and-stories"
-        note: "Required: Break down PRD into implementable epics and stories with full context (PRD + UX + Architecture)"
+        note: "Required: Break down PRD into implementable epics and stories with full context (PRD + UX + Architecture + Spec Ledger)"
 
       - id: "test-design"
         required: true

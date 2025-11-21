@@ -1,0 +1,41 @@
+# BRD to Spec Ledger Pipeline Workflow Configuration
+name: "brd-to-spec-ledger"
+description: "Parse BRD documents into Spec Ledger entries (requirements, entities, states, ACs, traceability) with a BRD_Parse_Log"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/2-plan-workflows/brd-to-spec-ledger"
+instructions: "{installed_path}/instructions.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_schema: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-sheets-schema.json"
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+
+# Input files (user provides BRD paths)
+# User will provide BRD document paths via input_file_patterns or direct input
+
+# Output files
+default_output_file: "{spec_ledger_folder}/brd-parse-log.md"
+
+standalone: true
+
+web_bundle:
+  name: "brd-to-spec-ledger"
+  description: "Parse BRD documents into Spec Ledger entries (requirements, entities, states, ACs, traceability) with a BRD_Parse_Log"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/2-plan-workflows/brd-to-spec-ledger/instructions.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/2-plan-workflows/brd-to-spec-ledger/instructions.md"
+    - "{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-sheets-schema.json"
+

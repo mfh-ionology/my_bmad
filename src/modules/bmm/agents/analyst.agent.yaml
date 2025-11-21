@@ -39,6 +39,18 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/document-project/workflow.yaml"
       description: Generate comprehensive documentation of an existing Project
 
+    - trigger: analyst-kickoff
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/1-analysis/analyst-kickoff/workflow.yaml"
+      description: Guided intake to capture pain-points, actors, workflows, and seed the Spec Ledger with Q&A-driven refinement
+
+    - trigger: brd-to-spec-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/2-plan-workflows/brd-to-spec-ledger/workflow.yaml"
+      description: Parse BRD documents into Spec Ledger entries (requirements, entities, states, ACs, traceability) with a BRD_Parse_Log
+
+    - trigger: coverage-view
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/coverage-view/workflow.yaml"
+      description: Inspect coverage and traceability across requirements, entities, pages, APIs, ACs, user stories, and NFRs
+
     - trigger: party-mode
       workflow: "{project-root}/{bmad_folder}/core/workflows/party-mode/workflow.yaml"
       description: Bring the whole team in to chat with other expert agents from the party

@@ -102,9 +102,13 @@ graph TB
 | **workflow-init**            | PM/Analyst    | All         | Entry point: discovery + routing                          | N/A             |
 | **tech-spec**                | PM            | Quick Flow  | Technical document → Story or Epic+Stories                | 1-15            |
 | **prd**                      | PM            | BMad Method | Strategic PRD with FRs/NFRs (no epic breakdown)           | 10-50+          |
+| **brd-to-spec-ledger**      | Analyst       | BMad Method | Parse BRD/PRD into structured Spec Ledger (required)    | N/A             |
+| **generate-spec-ledger-doc**| PM            | BMad Method | Generate Spec Ledger master document (optional)          | N/A             |
+| **sync-ledger-to-bmad-artifacts** | PM      | BMad Method | Sync Spec Ledger into PRD/architecture (required)       | N/A             |
 | **gdd**                      | Game Designer | BMad Method | Game Design Document with requirements                    | 10-50+          |
 | **narrative**                | Game Designer | BMad Method | Story-driven game/experience design                       | 10-50+          |
 | **create-ux-design**         | UX Designer   | BMad Method | Optional UX specification (after PRD)                     | N/A             |
+| **propose-stories-from-ledger** | PM        | BMad Method | Generate story files from Spec Ledger (optional)         | N/A             |
 | **create-epics-and-stories** | PM            | BMad Method | Break requirements into Epic+Stories (AFTER architecture) | N/A             |
 | **correct-course**           | PM/SM         | All         | Mid-stream requirement changes                            | N/A             |
 
@@ -144,9 +148,11 @@ BMM uses three distinct planning tracks that adapt to project complexity:
 
 **Documents:** PRD.md (FRs/NFRs) + architecture.md + epics.md + epic files
 
-**Greenfield:** Product Brief (optional) → PRD (FRs/NFRs) → UX (optional) → Architecture → Epics+Stories → Implementation
+**Greenfield:** Product Brief (optional) → PRD (FRs/NFRs) → **BRD→Spec Ledger** → Generate Spec Ledger Doc (optional) → Sync Ledger to Artifacts → UX (optional) → Architecture → Propose Stories from Ledger (optional) → Epics+Stories → Implementation
 
-**Brownfield:** document-project → PRD (FRs/NFRs) → Architecture (recommended) → Epics+Stories → Implementation
+**Brownfield:** document-project → PRD (FRs/NFRs) → **BRD→Spec Ledger** → Generate Spec Ledger Doc (optional) → Sync Ledger to Artifacts → Architecture (recommended) → Propose Stories from Ledger (optional) → Epics+Stories → Implementation
+
+**Note:** Spec Ledger is the single source of truth for requirements and design. It solves context loss in large projects by maintaining structured data instead of giant text documents. PRD, architecture, and frontend specs reference ledger IDs and load only relevant slices.
 
 **Example:** "Customer dashboard", "E-commerce platform", "Add search to existing app"
 
@@ -262,9 +268,106 @@ The system guides but never forces. You can override recommendations.
 
 **Note:** V6 improvement - PRD focuses on WHAT to build (requirements). Epic+Stories are created AFTER architecture via `create-epics-and-stories` workflow for better quality.
 
-**Integration:** Feeds into Architecture (Phase 3)
+**Integration:** Feeds into Spec Ledger pipeline, then Architecture (Phase 3)
 
 **Example:** E-commerce checkout → PRD with 15 FRs (user account, cart management, payment flow) and 8 NFRs (performance, security, scalability).
+
+---
+
+### Spec Ledger Workflows (BMad Method & Enterprise Method)
+
+**Purpose:** Spec Ledger is the **single source of truth** for requirements and design. It solves context loss in large projects by maintaining structured data (workbook-style sheets) instead of giant text documents. PRD, architecture, and frontend specs reference ledger IDs and load only relevant slices.
+
+**Why Spec Ledger?**
+- **Context Management:** Large PRDs/architectures don't need to live fully in model context
+- **Traceability:** Full traceability from BRD → Requirements → Data/UI/API/States/ACs → User Stories
+- **Iterative Refinement:** Q&A-driven workflows update only relevant rows without destroying confirmed fields
+- **Single Source of Truth:** All requirements and design details in structured format
+
+**Workflows:**
+
+#### brd-to-spec-ledger
+
+**Agent:** Analyst
+
+**Purpose:** Parse BRD/PRD documents into structured Spec Ledger entries with traceability.
+
+**Process:**
+1. Segment BRD into analyzable chunks
+2. Classify each segment (FR/NFR/UI/API/BR/Misc)
+3. Extract actors, workflows, entities, states, ACs
+4. Wire traceability (BRD segments → Requirements → Entities/Pages/APIs/ACs)
+5. Generate BRD_Parse_Log with confidence scores and ambiguities
+6. Ask targeted clarification questions for ambiguous segments
+
+**Key Outputs:**
+- `spec-ledger.json` - Structured ledger with all sheets (Requirements, Workflows, Entities, Fields, Pages, APIs, ACs, User_Stories, Traceability, etc.)
+- `brd-parse-log.md` - Parse log with confidence scores and ambiguities
+
+**When Ambiguous:** Workflow asks targeted questions, then updates only relevant ledger rows without wiping confirmed information.
+
+---
+
+#### generate-spec-ledger-doc
+
+**Agent:** PM
+
+**Purpose:** Generate comprehensive Spec Ledger master document from ledger sheets.
+
+**Process:**
+1. Load all ledger sheets
+2. Generate sections: Requirements, Workflows, State Models, Data Model, UI Surfaces, API Surface, Events, Errors, KPIs, User Stories, Traceability Matrix, Coverage Summary
+3. Load only relevant slices per section to stay within context
+
+**Key Outputs:**
+- `spec-ledger-master.md` - Complete master document (single source of truth)
+
+**Note:** This document is a **view** of the ledger, not the ledger itself. The ledger JSON is the canonical store.
+
+---
+
+#### sync-ledger-to-bmad-artifacts
+
+**Agent:** PM
+
+**Purpose:** Sync Spec Ledger content into PRD, architecture hints, frontend spec, and BMad story artifacts.
+
+**Process:**
+1. Update/augment PRD sections with precise requirements (add req_id references)
+2. Suggest architecture hints (entities, state models, APIs, events, external systems)
+3. Suggest/refine frontend spec (pages, page fields, actions, role mappings)
+4. Ensure BMad Epics/Stories align with ledger Requirements & Workflows
+
+**Key Principle:** Merge/augment using existing patterns - do NOT hard-overwrite PRD or architecture.
+
+**Key Outputs:**
+- Updated PRD.md with ledger references
+- Architecture hints (or architecture-hints.md)
+- Frontend spec (frontend-spec.md)
+- Updated epic files with workflow_id references
+
+---
+
+#### propose-stories-from-ledger
+
+**Agent:** PM
+
+**Purpose:** Use User_Stories entries to generate or update BMad story files with full traceability.
+
+**Process:**
+1. Read User_Stories sheet
+2. For each story with status = candidate or drafted:
+   - Propose/update story file (story-*.md)
+   - Include links to requirement_ids_ref, api_ids_ref, entities_ref, ac_ids_ref
+   - Link to workflow_id, pages_ref, action_id
+3. Group stories into epics by workflow/module
+4. Update story status in ledger
+
+**Key Outputs:**
+- Story files (story-*.md) with full traceability
+- Epic files grouped by workflow
+
+**Integration:** Can be used before or after `create-epics-and-stories` workflow.
 
 ---
 

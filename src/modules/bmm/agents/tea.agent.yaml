@@ -25,6 +25,10 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/workflow-status/workflow.yaml"
       description: Check workflow status and get recommendations
 
+    - trigger: test-trace-from-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/test-trace-from-ledger/workflow.yaml"
+      description: Leverage Spec Ledger acceptance criteria and traceability when designing test strategy and test cases
+
     - trigger: framework
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/testarch/framework/workflow.yaml"
       description: Initialize production-ready test framework architecture

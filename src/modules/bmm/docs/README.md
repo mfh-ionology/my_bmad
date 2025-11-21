@@ -117,8 +117,10 @@ Comprehensive documentation for all BMM workflows organized by phase:
 
 - **[Phase 2: Planning Workflows](./workflows-planning.md)** - Scale-adaptive planning (967 lines)
   - prd, tech-spec, gdd, narrative, ux
+  - **Spec Ledger workflows** (brd-to-spec-ledger, generate-spec-ledger-doc, sync-ledger-to-bmad-artifacts, propose-stories-from-ledger)
   - Track-based planning approach (Quick Flow, BMad Method, Enterprise Method)
   - Which planning workflow to use
+  - Spec Ledger as single source of truth for requirements and design
 
 - **[Phase 3: Solutioning Workflows](./workflows-solutioning.md)** - Architecture and validation (638 lines)
   - architecture, create-epics-and-stories, implementation-readiness

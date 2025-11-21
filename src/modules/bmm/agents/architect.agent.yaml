@@ -19,6 +19,10 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/workflow-status/workflow.yaml"
       description: Check workflow status and get recommendations
 
+    - trigger: spec-ledger-impact-analysis
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/impact-analysis/workflow.yaml"
+      description: Perform impact analysis based on Spec Ledger traceability across entities, APIs, workflows, pages, and external systems
+
     - trigger: create-architecture
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/architecture/workflow.yaml"
       description: Produce a Scale Adaptive Architecture

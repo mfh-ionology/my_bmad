@@ -1,0 +1,36 @@
+# Test Trace From Ledger Workflow Configuration
+name: "test-trace-from-ledger"
+description: "Leverage Spec Ledger acceptance criteria and traceability when designing test strategy and test cases"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/test-trace-from-ledger"
+instructions: "{installed_path}/instructions.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+
+# Output files
+default_output_file: "{output_folder}/test-strategy-from-ledger.md"
+
+standalone: true
+
+web_bundle:
+  name: "test-trace-from-ledger"
+  description: "Leverage Spec Ledger acceptance criteria and traceability when designing test strategy and test cases"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/spec-ledger/test-trace-from-ledger/instructions.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/spec-ledger/test-trace-from-ledger/instructions.md"
+

@@ -225,3 +225,26 @@ All agent customizations go in `{bmad_folder}/_cfg/agents/` and survive updates.
   - #bugs-issues - Bug reports
 - **Issues**: [GitHub Issue Tracker](https://github.com/bmad-code-org/BMAD-METHOD/issues)
 - **YouTube**: [BMad Code Channel](https://www.youtube.com/@BMadCode)
+
+## Spec Ledger (BMM)
+
+BMM in BMAD-METHOD v6 includes a **Spec Ledger** as the central design source-of-truth between the PRD and Architecture.
+
+The Spec Ledger stores structured information about:
+
+- Requirements and Workflows
+- Entities, Fields, State Models
+- Pages, Page Fields, Actions and Page–Actions–Roles
+- APIs, Events, Errors and Integrations
+- Analytics KPIs, NFRs and Acceptance Criteria
+- User Stories, Traceability and Coverage
+
+It is populated and consumed by workflows such as:
+
+- `analyst-kickoff`
+- `brd-to-spec-ledger`
+- `generate-spec-ledger-doc`
+- `sync-ledger-to-bmad-artifacts`
+- `propose-bmad-stories-from-ledger`
+
+This design allows large projects to be handled without keeping the entire PRD in model context; instead, workflows load only the relevant parts of the Spec Ledger.

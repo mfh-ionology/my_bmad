@@ -22,6 +22,10 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/workflow-status/workflow.yaml"
       description: Check workflow status and get recommendations
 
+    - trigger: coverage-view
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/coverage-view/workflow.yaml"
+      description: View coverage and gaps for this project or epic based on the Spec Ledger (requirements, stories, ACs, NFRs)
+
     - trigger: sprint-planning
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/4-implementation/sprint-planning/workflow.yaml"
       description: Generate or update sprint-status.yaml from epic files

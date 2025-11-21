@@ -1,0 +1,38 @@
+# Analyst Kickoff Workflow Configuration
+name: "analyst-kickoff"
+description: "Guided intake to capture pain-points, actors, workflows, and seed the Spec Ledger with Q&A-driven refinement"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/1-analysis/analyst-kickoff"
+instructions: "{installed_path}/instructions.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_schema: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-sheets-schema.json"
+
+# Output files
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+default_output_file: "{spec_ledger_folder}/analyst-kickoff-summary.md"
+
+standalone: true
+
+web_bundle:
+  name: "analyst-kickoff"
+  description: "Guided intake to capture pain-points, actors, workflows, and seed the Spec Ledger with Q&A-driven refinement"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/1-analysis/analyst-kickoff/instructions.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/1-analysis/analyst-kickoff/instructions.md"
+    - "{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-sheets-schema.json"
+

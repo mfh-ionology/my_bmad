@@ -1,0 +1,408 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Spec Ledger Sheets Schema",
+  "description": "Schema definition for Spec Ledger workbook-style sheets",
+  "type": "object",
+  "properties": {
+    "Requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "req_id": {"type": "string"},
+          "type": {"type": "string", "enum": ["FR", "NFR", "UI", "API", "BR", "Misc"]},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "source_ref": {"type": "string"},
+          "actors_ref": {"type": "array", "items": {"type": "string"}},
+          "workflows_ref": {"type": "array", "items": {"type": "string"}},
+          "priority": {"type": "string", "enum": ["P0", "P1", "P2", "P3"]},
+          "status": {"type": "string", "enum": ["draft", "approved", "implemented", "deprecated"]},
+          "notes": {"type": "string"}
+        },
+        "required": ["req_id", "type", "title"]
+      }
+    },
+    "Workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "workflow_id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "primary_actor": {"type": "string"},
+          "other_actors": {"type": "array", "items": {"type": "string"}},
+          "steps": {"type": "array", "items": {"type": "string"}},
+          "preconditions": {"type": "string"},
+          "postconditions": {"type": "string"},
+          "entities_ref": {"type": "array", "items": {"type": "string"}},
+          "pages_ref": {"type": "array", "items": {"type": "string"}},
+          "events_ref": {"type": "array", "items": {"type": "string"}},
+          "kpi_ref": {"type": "array", "items": {"type": "string"}},
+          "state_model_ref": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["workflow_id", "name"]
+      }
+    },
+    "State_Model": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state_model_id": {"type": "string"},
+          "entity_id": {"type": "string"},
+          "state_name": {"type": "string"},
+          "state_code": {"type": "string"},
+          "allowed_from_states": {"type": "array", "items": {"type": "string"}},
+          "allowed_roles": {"type": "array", "items": {"type": "string"}},
+          "guards": {"type": "string"},
+          "side_effects": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["state_model_id", "entity_id", "state_name", "state_code"]
+      }
+    },
+    "Entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "key_fields_ref": {"type": "array", "items": {"type": "string"}},
+          "state_model_id": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["entity_id", "name"]
+      }
+    },
+    "Fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field_id": {"type": "string"},
+          "entity_id": {"type": "string"},
+          "name": {"type": "string"},
+          "data_type": {"type": "string"},
+          "nullable": {"type": "boolean"},
+          "default": {"type": "string"},
+          "validation_rules": {"type": "string"},
+          "options": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["field_id", "entity_id", "name", "data_type"]
+      }
+    },
+    "Pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "page_id": {"type": "string"},
+          "module": {"type": "string"},
+          "name": {"type": "string"},
+          "route": {"type": "string"},
+          "description": {"type": "string"},
+          "entity_id": {"type": "string"},
+          "workflow_id": {"type": "string"},
+          "type": {"type": "string", "enum": ["list", "detail", "form", "dashboard", "other"]},
+          "notes": {"type": "string"}
+        },
+        "required": ["page_id", "name"]
+      }
+    },
+    "Page_Fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "page_field_id": {"type": "string"},
+          "page_id": {"type": "string"},
+          "field_id": {"type": "string"},
+          "control_type": {"type": "string"},
+          "visible": {"type": "boolean"},
+          "editable": {"type": "boolean"},
+          "required": {"type": "boolean"},
+          "order": {"type": "number"},
+          "group": {"type": "string"},
+          "validation_rules_ref": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["page_field_id", "page_id", "field_id"]
+      }
+    },
+    "Actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action_id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "level": {"type": "string", "enum": ["page", "entity", "workflow", "system"]},
+          "workflow_id": {"type": "string"},
+          "preconditions": {"type": "string"},
+          "postconditions": {"type": "string"},
+          "success_outcomes": {"type": "array", "items": {"type": "string"}},
+          "error_cases_ref": {"type": "array", "items": {"type": "string"}},
+          "events_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["action_id", "name", "level"]
+      }
+    },
+    "Page_Actions_Roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "page_action_role_id": {"type": "string"},
+          "page_id": {"type": "string"},
+          "action_id": {"type": "string"},
+          "role_id": {"type": "string"},
+          "role_name": {"type": "string"},
+          "permission": {"type": "string", "enum": ["read", "write", "execute", "admin"]},
+          "guard_expression": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["page_action_role_id", "page_id", "action_id", "role_id"]
+      }
+    },
+    "APIs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "api_id": {"type": "string"},
+          "method": {"type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]},
+          "path": {"type": "string"},
+          "description": {"type": "string"},
+          "entity_id": {"type": "string"},
+          "action_id_ref": {"type": "string"},
+          "type": {"type": "string", "enum": ["CRUD", "domain", "status", "query"]},
+          "request_schema_ref": {"type": "string"},
+          "response_schema_ref": {"type": "string"},
+          "errors_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["api_id", "method", "path"]
+      }
+    },
+    "Events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": {"type": "string"},
+          "name": {"type": "string"},
+          "trigger": {"type": "string"},
+          "payload_schema_ref": {"type": "string"},
+          "consumers": {"type": "array", "items": {"type": "string"}},
+          "reliability": {"type": "string", "enum": ["at-least-once", "exactly-once", "at-most-once"]},
+          "integrations_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["event_id", "name", "trigger"]
+      }
+    },
+    "Errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "error_id": {"type": "string"},
+          "code": {"type": "string"},
+          "message": {"type": "string"},
+          "severity": {"type": "string", "enum": ["error", "warning", "info"]},
+          "http_status": {"type": "number"},
+          "entity_id": {"type": "string"},
+          "api_ids_ref": {"type": "array", "items": {"type": "string"}},
+          "user_friendly_message": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["error_id", "code", "message"]
+      }
+    },
+    "Analytics_KPIs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kpi_id": {"type": "string"},
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "formula": {"type": "string"},
+          "entity_id_ref": {"type": "string"},
+          "events_ref": {"type": "array", "items": {"type": "string"}},
+          "reporting_views": {"type": "array", "items": {"type": "string"}},
+          "thresholds": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["kpi_id", "name"]
+      }
+    },
+    "ACs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ac_id": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "type": {"type": "string", "enum": ["positive", "negative", "edge_case"]},
+          "workflow_id_ref": {"type": "string"},
+          "requirement_ids_ref": {"type": "array", "items": {"type": "string"}},
+          "entities_ref": {"type": "array", "items": {"type": "string"}},
+          "api_ids_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["ac_id", "title", "type"]
+      }
+    },
+    "User_Stories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "story_id": {"type": "string"},
+          "workflow_id": {"type": "string"},
+          "role_id": {"type": "string"},
+          "role_name": {"type": "string"},
+          "title": {"type": "string"},
+          "narrative": {"type": "string"},
+          "goal": {"type": "string"},
+          "benefit": {"type": "string"},
+          "preconditions": {"type": "string"},
+          "trigger": {"type": "string"},
+          "postconditions": {"type": "string"},
+          "pages_ref": {"type": "array", "items": {"type": "string"}},
+          "action_id": {"type": "string"},
+          "api_ids_ref": {"type": "array", "items": {"type": "string"}},
+          "requirement_ids_ref": {"type": "array", "items": {"type": "string"}},
+          "ac_ids_ref": {"type": "array", "items": {"type": "string"}},
+          "entities_ref": {"type": "array", "items": {"type": "string"}},
+          "priority": {"type": "string", "enum": ["P0", "P1", "P2", "P3"]},
+          "status": {"type": "string", "enum": ["candidate", "drafted", "ready", "in-progress", "done"]},
+          "notes": {"type": "string"}
+        },
+        "required": ["story_id", "title", "status"]
+      }
+    },
+    "Traceability": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "trace_id": {"type": "string"},
+          "source_type": {"type": "string"},
+          "source_id": {"type": "string"},
+          "target_type": {"type": "string"},
+          "target_id": {"type": "string"},
+          "relation_type": {"type": "string", "enum": ["implements", "depends_on", "triggers", "validates", "uses", "references"]}
+        },
+        "required": ["trace_id", "source_type", "source_id", "target_type", "target_id", "relation_type"]
+      }
+    },
+    "Coverage_Matrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "coverage_row_id": {"type": "string"},
+          "workflow_id": {"type": "string"},
+          "aspect_type": {"type": "string"},
+          "aspect_id": {"type": "string"},
+          "covered": {"type": "boolean"},
+          "notes": {"type": "string"}
+        },
+        "required": ["coverage_row_id", "workflow_id", "aspect_type", "covered"]
+      }
+    },
+    "Uncovered_Aspects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uncovered_aspect_id": {"type": "string"},
+          "workflow_id": {"type": "string"},
+          "category": {"type": "string"},
+          "description": {"type": "string"},
+          "severity": {"type": "string", "enum": ["critical", "high", "medium", "low"]},
+          "notes": {"type": "string"}
+        },
+        "required": ["uncovered_aspect_id", "workflow_id", "category", "description"]
+      }
+    },
+    "External_Systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "external_system_id": {"type": "string"},
+          "name": {"type": "string"},
+          "type": {"type": "string", "enum": ["ERP", "CRM", "payment_gateway", "gov_api", "third_party_api", "database", "other"]},
+          "description": {"type": "string"},
+          "integration_modes": {"type": "array", "items": {"type": "string"}},
+          "apis_ref": {"type": "array", "items": {"type": "string"}},
+          "events_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["external_system_id", "name", "type"]
+      }
+    },
+    "Reference_Data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref_data_id": {"type": "string"},
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "values": {"type": "array", "items": {"type": "string"}},
+          "entities_ref": {"type": "array", "items": {"type": "string"}},
+          "pages_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["ref_data_id", "name", "category"]
+      }
+    },
+    "Background_Jobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "job_id": {"type": "string"},
+          "name": {"type": "string"},
+          "schedule": {"type": "string"},
+          "description": {"type": "string"},
+          "entities_ref": {"type": "array", "items": {"type": "string"}},
+          "apis_ref": {"type": "array", "items": {"type": "string"}},
+          "events_ref": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        },
+        "required": ["job_id", "name", "schedule"]
+      }
+    },
+    "BRD_Parse_Log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "log_id": {"type": "string"},
+          "brd_segment_ref": {"type": "string"},
+          "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+          "classification": {"type": "string"},
+          "mapped_to": {"type": "string"},
+          "ambiguities": {"type": "string"},
+          "notes": {"type": "string"}
+        },
+        "required": ["log_id", "brd_segment_ref", "confidence"]
+      }
+    }
+  }
+}
+
