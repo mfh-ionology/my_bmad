@@ -23,6 +23,10 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/impact-analysis/workflow.yaml"
       description: Perform impact analysis based on Spec Ledger traceability across entities, APIs, workflows, pages, and external systems
 
+    - trigger: generate-openapi-from-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/generate-openapi-from-ledger/workflow.yaml"
+      description: Generate or update the OpenAPI spec from the Spec Ledger when preparing technical design
+
     - trigger: create-architecture
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/architecture/workflow.yaml"
       description: Produce a Scale Adaptive Architecture

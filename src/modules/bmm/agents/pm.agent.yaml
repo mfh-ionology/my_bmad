@@ -41,6 +41,14 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/propose-bmad-stories-from-ledger/workflow.yaml"
       description: Use User_Stories entries to generate or update BMad story files with full traceability to requirements, entities, APIs, and ACs
 
+    - trigger: lint-spec-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/lint-spec-ledger/workflow.yaml"
+      description: Run Spec Ledger lint report before finalising PRD and hand-off
+
+    - trigger: generate-openapi-from-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/generate-openapi-from-ledger/workflow.yaml"
+      description: Generate openapi.yaml from the Spec Ledger APIs sheet
+
     - trigger: create-epics-and-stories
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/3-solutioning/create-epics-and-stories/workflow.yaml"
       description: Break PRD requirements into implementable epics and stories

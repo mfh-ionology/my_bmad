@@ -21,6 +21,12 @@ The Decision Architecture workflow is a complete reimagining of how architectura
 
 ## Key Features
 
+### 0. Spec Ledger Integration
+
+- Architecture workflow can reference Spec Ledger for entities, APIs, and data models
+- Use `generate-openapi-from-ledger` workflow to derive API contracts from the Spec Ledger
+- Ensures architecture aligns with structured requirements and design data
+
 ### 1. Starter Template Intelligence ⭐ NEW
 
 - Discovers relevant starter templates (create-next-app, create-t3-app, etc.)

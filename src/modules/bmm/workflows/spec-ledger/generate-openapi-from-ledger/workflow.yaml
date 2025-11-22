@@ -1,0 +1,39 @@
+# Generate OpenAPI From Ledger Workflow Configuration
+name: "generate-openapi-from-ledger"
+description: "Generate an OpenAPI 3.x specification (openapi.yaml) from the Spec Ledger APIs sheet"
+author: "BMad"
+
+# Critical variables from config
+config_source: "{project-root}/{bmad_folder}/bmm/config.yaml"
+project_name: "{config_source}:project_name"
+output_folder: "{config_source}:output_folder"
+user_name: "{config_source}:user_name"
+communication_language: "{config_source}:communication_language"
+document_output_language: "{config_source}:document_output_language"
+user_skill_level: "{config_source}:user_skill_level"
+date: system-generated
+
+# Module path and component files
+installed_path: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/generate-openapi-from-ledger"
+instructions: "{installed_path}/instructions.md"
+
+# Spec Ledger location
+spec_ledger_folder: "{output_folder}/spec-ledger"
+spec_ledger_file: "{spec_ledger_folder}/spec-ledger.json"
+spec_ledger_schema: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-sheets-schema.json"
+
+# Output files
+openapi_output_file: "{output_folder}/openapi.yaml"
+default_output_file: "{openapi_output_file}"
+
+standalone: true
+
+web_bundle:
+  name: "generate-openapi-from-ledger"
+  description: "Generate an OpenAPI 3.x specification (openapi.yaml) from the Spec Ledger APIs sheet"
+  author: "BMad"
+  instructions: "{bmad_folder}/bmm/workflows/spec-ledger/generate-openapi-from-ledger/instructions.md"
+  web_bundle_files:
+    - "{bmad_folder}/bmm/workflows/spec-ledger/generate-openapi-from-ledger/instructions.md"
+    - "{bmad_folder}/bmm/workflows/spec-ledger/spec-ledger-sheets-schema.json"
+

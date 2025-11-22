@@ -90,6 +90,7 @@ graph TB
 | ---------------------------- | ----------- | ------------------------ | -------------------------------------------- |
 | **sync-ledger-to-bmad-artifacts** | PM      | BMad Method, Enterprise  | Sync Spec Ledger into PRD/architecture (from Planning) |
 | **propose-stories-from-ledger** | PM        | BMad Method, Enterprise  | Generate story files from Spec Ledger (optional) |
+| **generate-openapi-from-ledger** | PM, Architect | BMad Method, Enterprise | Generate OpenAPI spec from Spec Ledger APIs |
 | **create-ux-design**         | UX Designer | BMad Method, Enterprise  | Optional UX design (after PRD, before arch)  |
 | **architecture**             | Architect   | BMad Method, Enterprise  | Technical architecture and design decisions  |
 | **create-epics-and-stories** | PM          | BMad Method, Enterprise  | Break FRs/NFRs into epics after architecture |
@@ -258,6 +259,28 @@ This is NOT a template filler. The architecture workflow:
 - Groups stories into epics by workflow/module
 
 **Integration:** Can be used before or after create-epics-and-stories workflow.
+
+---
+
+### generate-openapi-from-ledger
+
+**Agent:** PM, Architect
+
+**Purpose:** Generate an OpenAPI 3.x specification from the Spec Ledger APIs sheet.
+
+**When to Use:** Recommended way to derive an API contract (OpenAPI) from the Spec Ledger when preparing technical design. Ensures developers have a single, consistent view of the API surface that matches the ledger.
+
+**Key Process:**
+- Reads APIs sheet from Spec Ledger
+- Generates OpenAPI paths from API method and path
+- Creates request/response schemas from referenced entities and fields
+- Includes error responses from Errors sheet
+- Produces valid OpenAPI 3.x YAML
+
+**Key Outputs:**
+- `openapi.yaml` - Complete OpenAPI 3.x specification
+
+**Integration:** Use after Spec Ledger is populated and APIs are defined. Can be run multiple times to regenerate as the ledger evolves.
 
 ---
 

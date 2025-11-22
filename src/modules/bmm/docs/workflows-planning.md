@@ -104,6 +104,7 @@ graph TB
 | **prd**                      | PM            | BMad Method | Strategic PRD with FRs/NFRs (no epic breakdown)           | 10-50+          |
 | **brd-to-spec-ledger**      | Analyst       | BMad Method | Parse BRD/PRD into structured Spec Ledger (required)    | N/A             |
 | **generate-spec-ledger-doc**| PM            | BMad Method | Generate Spec Ledger master document (optional)          | N/A             |
+| **lint-spec-ledger**        | Analyst, PM, TEA | BMad Method | Validate Spec Ledger for orphan refs, duplicates, gaps (recommended) | N/A |
 | **sync-ledger-to-bmad-artifacts** | PM      | BMad Method | Sync Spec Ledger into PRD/architecture (required)       | N/A             |
 | **gdd**                      | Game Designer | BMad Method | Game Design Document with requirements                    | 10-50+          |
 | **narrative**                | Game Designer | BMad Method | Story-driven game/experience design                       | 10-50+          |
@@ -323,6 +324,26 @@ The system guides but never forces. You can override recommendations.
 - `spec-ledger-master.md` - Complete master document (single source of truth)
 
 **Note:** This document is a **view** of the ledger, not the ledger itself. The ledger JSON is the canonical store.
+
+---
+
+#### lint-spec-ledger
+
+**Agent:** Analyst, PM, TEA
+
+**Purpose:** Validate the Spec Ledger for quality issues before moving to Solutioning/Development.
+
+**Process:**
+1. Check for duplicate IDs across all sheets
+2. Identify orphan references (actions not used, APIs without links, ACs without requirements/workflows)
+3. Validate User Story references (requirements, APIs, entities, pages, ACs)
+4. Check basic coverage (workflows with entities, pages, APIs, ACs)
+5. Summarize BRD_Parse_Log status if present
+
+**Key Outputs:**
+- `spec-ledger-lint-report.md` - Report with errors (must fix) and warnings (nice to address)
+
+**When to Use:** Recommended as a final check after Spec Ledger is populated and before moving fully into Solutioning/Development. It checks for orphan references, duplicate IDs, and basic coverage gaps.
 
 ---
 

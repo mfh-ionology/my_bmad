@@ -51,6 +51,10 @@ agent:
       workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/coverage-view/workflow.yaml"
       description: Inspect coverage and traceability across requirements, entities, pages, APIs, ACs, user stories, and NFRs
 
+    - trigger: lint-spec-ledger
+      workflow: "{project-root}/{bmad_folder}/bmm/workflows/spec-ledger/lint-spec-ledger/workflow.yaml"
+      description: Lint the Spec Ledger for orphan references, duplicate IDs, and basic coverage gaps
+
     - trigger: party-mode
       workflow: "{project-root}/{bmad_folder}/core/workflows/party-mode/workflow.yaml"
       description: Bring the whole team in to chat with other expert agents from the party
